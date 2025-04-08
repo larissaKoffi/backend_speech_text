@@ -1,6 +1,3 @@
-SpeechRecognition
-PyMuPDF
 transformers
 flask
-tensorflow
 torch
