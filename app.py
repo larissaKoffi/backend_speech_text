@@ -4,7 +4,7 @@ import re
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5500","http://localhost:5501", "http://localhost:5502"])
+CORS(app, origins=["http://127.0.0.1:5500","http://127.0.0.1:5501", "http://127.0.0.1:5502"])
 
 # Chargement du modèle
 tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
