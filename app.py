@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from transformers import BartForConditionalGeneration, BartTokenizer
 import re
 from flask_cors import CORS
@@ -21,13 +21,24 @@ def fn_summary(text):
     summary_ids = model.generate(inputs['input_ids'], max_length=150, num_beams=4, length_penalty=2.0, early_stopping=True)
     return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
+# def _build_cors_preflight_response():
+#     response = make_response()
+#     response.headers.add("Access-Control-Allow-Origin", "*")
+#     response.headers.add('Access-Control-Allow-Headers', "*")
+#     response.headers.add('Access-Control-Allow-Methods', "*")
+#     return response
+
+def _corsify_actual_response(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
+
 @app.route('/summarize', methods=['POST'])
 def summarize():
     data = request.get_json()
     texte = data.get('text', '')
     texte_propre = nettoyer(texte)
     summary = fn_summary(texte_propre)
-    return jsonify({'summary': summary})
+    return _corsify_actual_response(jsonify({'summary': summary}))
 
 if __name__ == "__main__":
     app.run(debug=True)
