@@ -18,8 +18,13 @@ def nettoyer(texte):
 
 def fn_summary(text):
     inputs = tokenizer(text, return_tensors="pt", max_length=1024, truncation=True)
-    summary_ids = model.generate(inputs['input_ids'], max_length=150, num_beams=4, length_penalty=2.0, early_stopping=True)
+
+    summary_ids = model.generate(
+        inputs['input_ids'],max_length=50, min_length=5,num_beams=4, length_penalty=1.5, early_stopping=True, no_repeat_ngram_size=2
+    )
+
     return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+
 
 # def _build_cors_preflight_response():
 #     response = make_response()
