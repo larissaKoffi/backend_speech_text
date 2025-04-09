@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from transformers import BartForConditionalGeneration, BartTokenizer
 import re
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:5500","http://localhost:5501", "http://localhost:5502"])
 
 # Chargement du modèle
 tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn")
@@ -19,7 +21,7 @@ def summary(text):
     summary_ids = model.generate(inputs['input_ids'], max_length=150, num_beams=4, length_penalty=2.0, early_stopping=True)
     return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
-@app.route('/api/summarize', methods=['POST'])
+@app.route('/summarize', methods=['POST'])
 def summarize():
     data = request.get_json()
     texte = data.get('text', '')

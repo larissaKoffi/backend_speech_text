@@ -1,3 +1,4 @@
 transformers
 flask
 torch
+flask-cors
