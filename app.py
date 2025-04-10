@@ -41,6 +41,7 @@ def _corsify_actual_response(response):
 def summarize():
     data = request.get_json()
     texte = data.get('text', '')
+    print("Texte reçu :", data)
     texte_propre = nettoyer(texte)
     summary = fn_summary(texte_propre)
     return _corsify_actual_response(jsonify({'summary': summary}))
