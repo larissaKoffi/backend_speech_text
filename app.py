@@ -33,9 +33,9 @@ def fn_summary(text):
 #     response.headers.add('Access-Control-Allow-Methods', "*")
 #     return response
 
-def _corsify_actual_response(response):
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    return response
+# def _corsify_actual_response(response):
+#     response.headers.add("Access-Control-Allow-Origin", "*")
+#     return response
 
 @app.route('/summarize', methods=['POST'])
 def summarize():
@@ -44,7 +44,7 @@ def summarize():
     print("Texte reçu :", data)
     texte_propre = nettoyer(texte)
     summary = fn_summary(texte_propre)
-    return _corsify_actual_response(jsonify({'summary': summary}))
+    return jsonify({'summary': summary})
 
 if __name__ == "__main__":
     app.run(debug=True)
