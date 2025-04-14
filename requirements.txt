@@ -1,4 +1,11 @@
+SpeechRecognition
+PyMuPDF
 transformers
-flask
+Flask
 torch
 flask-cors
+SentencePiece
+torchaudio
+soundfile
+pydub
+ffmpeg
