@@ -8,7 +8,7 @@ from pydub import AudioSegment
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 
 app = Flask(__name__)
-CORS(app, origins=["http://127.0.0.1:5500", "http://localhost:5500"], supports_credentials=True)
+CORS(app, origins=["https://frontend-speech-text.vercel.app/", "http://localhost:5500"], supports_credentials=True)
 
 
 #dictionnaire pour mettre les emotions en francais
