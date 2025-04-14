@@ -78,7 +78,7 @@ def fn_summary(text):
 
 
 @app.route('/analyze', methods=['POST', 'OPTIONS'])
-@cross_origin(origins=["http://localhost:5500", "http://127.0.0.1:5500"], supports_credentials=True)
+@cross_origin(origins=["https://frontend-speech-text.vercel.app/", "http://127.0.0.1:5500"], supports_credentials=True)
 def analyze():
     try:
         transcript = request.form['text']
