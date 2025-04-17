@@ -8,7 +8,7 @@ from pydub import AudioSegment
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 
 app = Flask(__name__)
-CORS(app, origins=["https://frontend-speech-text.vercel.app/", "http://localhost:5500"], supports_credentials=True)
+cors = CORS(app, origins=["https://frontend-speech-text.vercel.app/", "http://localhost:5500"], supports_credentials=True)
 
 
 #dictionnaire pour mettre les emotions en francais
@@ -78,14 +78,14 @@ def fn_summary(text):
 
 
 @app.route('/analyze', methods=['POST', 'OPTIONS'])
-@cross_origin(origins=["https://frontend-speech-text.vercel.app/", "http://127.0.0.1:5500"], supports_credentials=True)
+@cross_origin(origins=["https://frontend-speech-text.vercel.app/", "http://127.0.0.1:5500"], headers=['Content- Type', 'Authorization', 'Access-Control-Allow-Origin: *'])
 def analyze():
     try:
         transcript = request.form['text']
         audio_file = request.files['audio']
 
         print("Texte reçu :", transcript)
-        print("Nom fichier audio :", audio_file.filename)
+        print("Nom fichier au*dio :", audio_file.filename)
         print("MIME Type :", audio_file.content_type)
 
         audio_segment = AudioSegment.from_file(audio_file, format="webm")
